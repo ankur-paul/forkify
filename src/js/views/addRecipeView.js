@@ -47,6 +47,11 @@ class AddRecipeView extends View {
       handler(data);
     });
   }
+
+  hideWindow() {
+    this._overlay.classList.add('hidden');
+    this._window.classList.add('hidden');
+  }
 }
 
 export default new AddRecipeView();

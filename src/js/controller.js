@@ -105,9 +105,9 @@ const controlAddRecipe = async function (recipe) {
     // 4. Render Success message
     addRecipeView.renderMessage();
 
-    // 5. Colse addRecipeView
+    // 5. hide addRecipeView
     setTimeout(function () {
-      addRecipeView.toggleWindow();
+      addRecipeView.hideWindow();
     }, MODAL_CLOSE_SEC * 1000);
 
     // 6. Change ID in url
