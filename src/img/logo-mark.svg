@@ -1,0 +1,20 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="brandGradient" x1="18" y1="10" x2="103" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F9F90" />
+      <stop offset="1" stop-color="#1F6C62" />
+    </linearGradient>
+  </defs>
+
+  <circle cx="60" cy="60" r="60" fill="url(#brandGradient)" />
+
+  <g stroke="#FFF8EF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="35" y1="36" x2="35" y2="62" />
+    <line x1="47" y1="36" x2="47" y2="62" />
+    <line x1="59" y1="36" x2="59" y2="62" />
+    <line x1="47" y1="58" x2="47" y2="88" />
+    <line x1="78" y1="49" x2="78" y2="87" />
+  </g>
+
+  <circle cx="78" cy="36" r="12" fill="#FFF8EF" />
+</svg>

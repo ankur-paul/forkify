@@ -1,19 +1,19 @@
-// $color-primary: #f59a83;
-$color-primary: #f38e82;
-$color-grad-1: #fbdb89;
-$color-grad-2: #f48982;
+$color-primary: #2b7a6f;
+$color-grad-1: #4f9f90;
+$color-grad-2: #1f6c62;
 
-$color-grey-light-1: #f9f5f3; // Light background
-$color-grey-light-2: #f2efee; // Light lines
-$color-grey-light-3: #d3c7c3; // Light text (placeholder)
-$color-grey-dark-1: #615551; // Normal text
-$color-grey-dark-2: #918581; // Lighter text
+$color-grey-light-1: #fffdfa;
+$color-grey-light-2: #f4ede2;
+$color-grey-light-3: #a89f93;
+$color-grey-dark-1: #2f3936;
+$color-grey-dark-2: #5f6b67;
 
-$gradient: linear-gradient(to right bottom, $color-grad-1, $color-grad-2);
+$gradient: linear-gradient(135deg, $color-grad-1, $color-grad-2);
+$gradient-soft: linear-gradient(150deg, #f9f1e7, #efe3d3);
 
 $bp-large: 78.15em; // 1250px
 $bp-medium: 61.25em; // 980px
-$bp-small: 37.5em; // 600px
+$bp-small: 43.75em; // 700px
 $bp-smallest: 31.25em; // 500px
 
 * {
@@ -32,40 +32,116 @@ html {
   font-size: 62.5%;
 
   @media only screen and (max-width: $bp-medium) {
+    font-size: 56.25%;
+  }
+
+  @media only screen and (max-width: $bp-small) {
     font-size: 50%;
   }
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.55;
   color: $color-grey-dark-1;
-  background-image: $gradient;
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: calc(100vh - 2 * 4vw);
+  min-height: 100vh;
+  padding: 0 2.4rem 2.4rem;
+  position: relative;
+  background:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(255, 255, 255, 0.85),
+      transparent 34%
+    ),
+    radial-gradient(circle at 86% 5%, rgba(43, 122, 111, 0.2), transparent 34%),
+    $gradient-soft;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  width: 34rem;
+  height: 34rem;
+  top: -10rem;
+  right: -7rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(79, 159, 144, 0.32),
+    transparent 65%
+  );
+}
+
+body::after {
+  width: 44rem;
+  height: 44rem;
+  left: -12rem;
+  bottom: -16rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(244, 237, 226, 0.95),
+    transparent 70%
+  );
 }
 
 .container {
-  max-width: 120rem;
-  min-height: 117rem;
-  margin: 4vw auto;
-  background-color: #fff;
-  border-radius: 9px;
+  width: min(128rem, 100%);
+  min-height: calc(100vh - 4.8rem);
+  margin: 2.4rem auto 0;
+  border-radius: 3rem;
+  border: 1px solid rgba($color-grey-dark-1, 0.08);
+  background-color: rgba(255, 253, 250, 0.9);
+  backdrop-filter: blur(8px);
   overflow: hidden;
-  box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
+  box-shadow: 0 2.4rem 5rem rgba(36, 51, 48, 0.17);
+  animation: page-enter 0.65s ease-out;
 
   display: grid;
-  grid-template-rows: 10rem minmax(100rem, auto);
-  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto minmax(70rem, 1fr);
+  grid-template-columns: minmax(34rem, 42rem) minmax(0, 1fr);
   grid-template-areas:
     'head head'
     'list recipe';
 
   @media only screen and (max-width: $bp-large) {
-    max-width: 100%;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
     margin: 0;
+    min-height: 100vh;
     border-radius: 0;
+    grid-template-rows: auto minmax(34rem, auto) minmax(46rem, 1fr);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'head'
+      'list'
+      'recipe';
+  }
+}
+
+@keyframes page-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(2rem) scale(0.99);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media only screen and (max-width: $bp-smallest) {
+  body {
+    padding: 0;
   }
 }

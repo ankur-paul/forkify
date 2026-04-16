@@ -1,28 +1,101 @@
 .header {
   grid-area: head;
-  background-color: $color-grey-light-1;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(30rem, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
+  gap: 2.4rem;
+  padding: 2rem 2.8rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 253, 250, 0.95),
+    rgba(255, 253, 250, 0.78)
+  );
+  border-bottom: 1px solid rgba($color-grey-dark-1, 0.09);
 
   &__logo {
-    margin-left: 4rem;
-    height: 4.6rem;
-    display: block;
+    grid-column: 1 / 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    filter: drop-shadow(0 1rem 1.3rem rgba($color-grey-dark-2, 0.16));
+  }
+
+  &__logo-icon {
+    width: 4.8rem;
+    height: 4.8rem;
+    flex: 0 0 4.8rem;
+    border-radius: 50%;
+  }
+
+  &__logo-wordmark {
+    font-family: 'Newsreader', serif;
+    font-size: 4.2rem;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: $color-grey-dark-1;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'logo nav'
+      'search search';
+    row-gap: 1.6rem;
+
+    &__logo {
+      grid-area: logo;
+      gap: 0.8rem;
+    }
+
+    &__logo-icon {
+      width: 4.2rem;
+      height: 4.2rem;
+      flex-basis: 4.2rem;
+    }
+
+    &__logo-wordmark {
+      font-size: 3.6rem;
+    }
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 1.5rem 1.6rem;
+    gap: 1.2rem;
+
+    &__logo-wordmark {
+      font-size: 3.1rem;
+    }
+  }
+
+  @media only screen and (max-width: $bp-smallest) {
+    &__logo-wordmark {
+      font-size: 2.7rem;
+    }
   }
 }
 
 .search {
-  background-color: #fff;
+  grid-column: 2 / 3;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba($color-grey-dark-1, 0.12);
   border-radius: 10rem;
   display: flex;
   align-items: center;
-  padding-left: 3rem;
-  transition: all 0.3s;
+  gap: 1.2rem;
+  padding: 0.6rem 0.7rem 0.6rem 2rem;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 
   &:focus-within {
-    transform: translateY(-2px);
-    box-shadow: 0 0.7rem 3rem rgba($color-grey-dark-1, 0.08);
+    transform: translateY(-1px);
+    border-color: rgba($color-primary, 0.5);
+    box-shadow: 0 1rem 2rem rgba($color-grey-dark-1, 0.12);
   }
 
   &__field {
@@ -30,8 +103,8 @@
     background: none;
     font-family: inherit;
     color: inherit;
-    font-size: 1.7rem;
-    width: 30rem;
+    font-size: 1.6rem;
+    width: 100%;
 
     &:focus {
       outline: none;
@@ -40,29 +113,37 @@
     &::placeholder {
       color: $color-grey-light-3;
     }
-
-    @media only screen and (max-width: $bp-medium) {
-      width: auto;
-
-      &::placeholder {
-        color: white;
-      }
-    }
   }
 
   &__btn {
-    font-weight: 600;
-    font-family: inherit;
+    flex: 0 0 auto;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-area: search;
+    grid-column: 1 / -1;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    gap: 0.8rem;
+    padding-left: 1.6rem;
+
+    &__field {
+      font-size: 1.45rem;
+    }
   }
 }
 
 .nav {
+  grid-column: 3 / 4;
   align-self: stretch;
-  margin-right: 2.5rem;
+  margin-right: 0.4rem;
 
   &__list {
     list-style: none;
     display: flex;
+    align-items: center;
+    gap: 0.8rem;
     height: 100%;
   }
 
@@ -71,24 +152,26 @@
   }
 
   &__btn {
-    height: 100%;
+    min-height: 4.8rem;
     font-family: inherit;
-    color: inherit;
-    font-size: 1.4rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    background: none;
-    border: none;
+    color: $color-grey-dark-1;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    text-transform: none;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba($color-grey-dark-1, 0.1);
+    border-radius: 999px;
     cursor: pointer;
     padding: 0 1.5rem;
-    transition: all 0.3s;
+    transition: all 0.25s;
 
     display: flex;
     align-items: center;
 
     svg {
-      height: 2.4rem;
-      width: 2.4rem;
+      height: 1.9rem;
+      width: 1.9rem;
       fill: $color-primary;
       margin-right: 0.7rem;
       transform: translateY(-1px);
@@ -99,7 +182,32 @@
     }
 
     &:hover {
-      background-color: $color-grey-light-2;
+      transform: translateY(-1px);
+      border-color: rgba($color-primary, 0.45);
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0.8rem 1.8rem rgba($color-grey-dark-1, 0.14);
+    }
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-area: nav;
+    grid-column: auto;
+    justify-self: end;
+    margin-right: 0;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    &__btn {
+      min-height: 4.2rem;
+      padding: 0 1.1rem;
+
+      span {
+        display: none;
+      }
+
+      svg {
+        margin-right: 0;
+      }
     }
   }
 }
@@ -107,16 +215,20 @@
 .bookmarks {
   padding: 1rem 0;
   position: absolute;
-  // right: 0;
-  right: -2.5rem;
+  top: calc(100% + 1.1rem);
+  right: 0;
   z-index: 10;
-  width: 40rem;
-  background-color: #fff;
-  box-shadow: 0 0.8rem 5rem 2rem rgba($color-grey-dark-1, 0.1);
+  width: min(42rem, 88vw);
+  border-radius: 1.8rem;
+  border: 1px solid rgba($color-grey-dark-1, 0.1);
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1.2rem 3rem rgba($color-grey-dark-1, 0.15);
 
   visibility: hidden;
   opacity: 0;
-  transition: all 0.5s 0.2s;
+  transform: translateY(1rem);
+  transition: all 0.25s;
 
   &__list {
     list-style: none;
@@ -140,5 +252,6 @@
   .nav__btn--bookmarks:hover + & {
     visibility: visible;
     opacity: 1;
+    transform: translateY(0);
   }
 }

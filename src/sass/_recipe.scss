@@ -1,13 +1,18 @@
 .recipe {
-  background-color: $color-grey-light-1;
+  grid-area: recipe;
+  min-height: 0;
+  overflow-y: auto;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 253, 250, 0.86),
+    rgba(244, 237, 226, 0.82)
+  );
 
   ///////////
   // FIGURE
   &__fig {
-    height: 32rem;
+    height: 34rem;
     position: relative;
-    // transform: scale(1.04) translateY(-1px);
-    transform-origin: top;
 
     &::before {
       content: '';
@@ -17,12 +22,11 @@
       position: absolute;
       top: 0;
       left: 0;
-      background-image: linear-gradient(
-        to right bottom,
-        $color-grad-1,
-        $color-grad-2
+      background: linear-gradient(
+        to top,
+        rgba(31, 46, 43, 0.52),
+        rgba(31, 46, 43, 0.08) 55%
       );
-      opacity: 0.6;
     }
   }
 
@@ -35,30 +39,30 @@
 
   &__title {
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 20%) skewY(-6deg);
+    left: 3.2rem;
+    bottom: 2.8rem;
+    transform: none;
     color: #fff;
     font-weight: 700;
-    font-size: 3.25rem;
-    text-transform: uppercase;
-    width: 50%;
-    line-height: 1.95;
-    text-align: center;
+    font-family: 'Newsreader', serif;
+    font-size: clamp(2.8rem, 3.4vw, 4.4rem);
+    text-transform: none;
+    width: min(70rem, calc(100% - 6.4rem));
+    line-height: 1.08;
+    text-align: left;
 
     span {
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
-      padding: 1.3rem 2rem;
-      background-image: linear-gradient(
-        to right bottom,
-        $color-grad-1,
-        $color-grad-2
-      );
+      padding: 0.5rem 1rem;
+      background-color: rgba(24, 33, 31, 0.5);
+      border-radius: 0.7rem;
     }
 
     @media only screen and (max-width: $bp-medium) {
-      width: 70%;
+      left: 2.4rem;
+      width: calc(100% - 4.8rem);
+      bottom: 2.2rem;
     }
   }
 
@@ -66,55 +70,64 @@
   // DETAILS
   &__details {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    padding: 7.5rem 8rem 3.5rem 8rem;
+    gap: 1.4rem;
+    padding: 3rem 3.2rem;
   }
 
   &__info {
-    font-size: 1.65rem;
+    font-size: 1.25rem;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
     display: flex;
     align-items: center;
+    color: $color-grey-dark-2;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.68);
+    border: 1px solid rgba($color-grey-dark-1, 0.1);
+    padding: 0.7rem 1.3rem;
 
     &:not(:last-child) {
-      margin-right: 4.5rem;
+      margin-right: 0;
     }
   }
 
   &__info-icon {
-    height: 2.35rem;
-    width: 2.35rem;
+    height: 1.8rem;
+    width: 1.8rem;
     fill: $color-primary;
-    margin-right: 1.15rem;
+    margin-right: 0.7rem;
   }
 
   &__info-data {
-    margin-right: 0.5rem;
+    margin-right: 0.45rem;
     font-weight: 700;
+    color: $color-grey-dark-1;
   }
 
   &__info-buttons {
     display: flex;
-    margin-left: 1.6rem;
-    transform: translateY(-1px);
+    margin-left: 1rem;
+    transform: translateY(0);
   }
 
   &__user-generated {
-    background-color: darken($color-grey-light-2, 2%);
+    background-color: rgba($color-primary, 0.14);
 
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4rem;
-    width: 4rem;
+    height: 3.6rem;
+    width: 3.6rem;
     border-radius: 10rem;
 
     margin-left: auto;
-    margin-right: 1.75rem;
+    margin-right: 0.2rem;
 
     svg {
-      height: 2.25rem;
-      width: 2.25rem;
+      height: 2rem;
+      width: 2rem;
       fill: $color-primary;
     }
   }
@@ -122,58 +135,126 @@
   ///////////
   // INGREDIENTS
   &__ingredients {
-    padding: 5rem 8rem;
-    font-size: 1.6rem;
+    margin: 0 3.2rem 3.2rem;
+    padding: 2.8rem;
+    border-radius: 2.2rem;
+    border: 1px solid rgba($color-grey-dark-1, 0.08);
+    font-size: 1.55rem;
     line-height: 1.4;
     background-color: $color-grey-light-2;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
 
   &__ingredient-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem 3rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem 2.4rem;
     list-style: none;
   }
 
   &__ingredient {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2rem auto 1fr;
+    gap: 0.9rem;
+    align-items: start;
   }
 
   &__icon {
-    height: 2rem;
-    width: 2rem;
+    height: 1.8rem;
+    width: 1.8rem;
     fill: $color-primary;
-    margin-right: 1.1rem;
     flex: 0 0 auto;
-    margin-top: 0.1rem;
+    margin-top: 0.2rem;
   }
 
   &__quantity {
-    margin-right: 0.5rem;
+    margin-right: 0;
     flex: 0 0 auto;
+    font-weight: 600;
+    color: $color-grey-dark-1;
   }
 
   ///////////
   // DIRECTIONS
   &__directions {
-    padding: 5rem 10rem;
-    padding-bottom: 5rem;
+    padding: 0 3.2rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
 
   &__directions-text {
-    font-size: 1.7rem;
+    max-width: 66rem;
+    font-size: 1.62rem;
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.4rem;
     color: $color-grey-dark-2;
   }
 
   &__publisher {
     font-weight: 700;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    &__fig {
+      height: 30rem;
+    }
+
+    &__details {
+      padding: 2.2rem 2.4rem;
+    }
+
+    &__ingredients {
+      margin: 0 2.4rem 2.4rem;
+    }
+
+    &__directions {
+      padding: 0 2.4rem 3.2rem;
+    }
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    &__title {
+      left: 1.8rem;
+      bottom: 1.8rem;
+      width: calc(100% - 3.6rem);
+    }
+
+    &__details {
+      padding: 1.8rem 1.6rem;
+      gap: 1rem;
+    }
+
+    &__info {
+      font-size: 1.15rem;
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    &__user-generated {
+      order: 3;
+      margin-left: 0;
+    }
+
+    &__ingredients {
+      margin: 0 1.6rem 1.8rem;
+      padding: 2rem 1.6rem;
+    }
+
+    &__ingredient-list {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    &__directions {
+      padding: 0 1.6rem 2.6rem;
+    }
+
+    &__directions-text {
+      font-size: 1.48rem;
+    }
   }
 }

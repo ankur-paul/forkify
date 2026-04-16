@@ -1,47 +1,95 @@
 .search-results {
-  padding: 3rem 0;
+  grid-area: list;
+  padding: 2rem 0 0;
   display: flex;
   flex-direction: column;
+  min-height: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 253, 250, 0.55),
+      rgba(255, 253, 250, 0.8)
+    ),
+    $gradient-soft;
+  border-right: 1px solid rgba($color-grey-dark-1, 0.08);
+
+  @media only screen and (max-width: $bp-medium) {
+    border-right: none;
+    border-bottom: 1px solid rgba($color-grey-dark-1, 0.08);
+    max-height: 42rem;
+  }
 }
 
 .results {
   list-style: none;
-  margin-bottom: 2rem;
+  margin-bottom: 1.4rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.8rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color-grey-dark-2, 0.25);
+    border-radius: 999px;
+  }
 }
 
 .pagination {
   margin-top: auto;
-  padding: 0 3.5rem;
-
-  &::after {
-    content: '';
-    display: table;
-    clear: both;
-  }
+  padding: 1.8rem 2.4rem 2.3rem;
+  border-top: 1px solid rgba($color-grey-dark-1, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 
   &__btn {
     &--prev {
-      float: left;
+      margin-right: auto;
     }
+
     &--next {
-      float: right;
+      margin-left: auto;
     }
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 1.4rem 1.6rem 1.8rem;
   }
 }
 
 .copyright {
   color: $color-grey-dark-2;
-  font-size: 1.2rem;
-  padding: 0 3.5rem;
-  margin-top: 4rem;
+  font-size: 1.15rem;
+  padding: 0 2.4rem 2.2rem;
+  margin-top: 1.8rem;
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
+
+  span {
+    opacity: 0.92;
+  }
 
   .twitter-link:link,
   .twitter-link:visited,
   .linkedin-link:link,
   .linkedin-link:visited {
-    // font-weight: bold;
-    color: $color-grey-dark-2;
+    color: $color-grey-dark-1;
+    font-weight: 600;
+    text-underline-offset: 0.2rem;
+    transition: color 0.2s;
+  }
+
+  .twitter-link:hover,
+  .linkedin-link:hover {
+    color: $color-primary;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 0 1.6rem 1.8rem;
   }
 }
